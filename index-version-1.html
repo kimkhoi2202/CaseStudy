@@ -18,6 +18,10 @@
         <legend><h2>Your Tasks</h2></legend>
         <ul id="display-task-list"></ul>
     </fieldset>
+    <fieldset>
+        <legend><h2>Completed Tasks</h2></legend>
+        <ul id="display-completed-task-list"></ul>
+    </fieldset>
 </body>
 </html>
 
@@ -92,6 +96,29 @@
         task_id_edit.readOnly = true;
         task_list[edit_btn_id.slice(-1)] = task_id_edit.value;
     }
+
+    function delete_Task(complete_btn_id) {
+        const display_completed_task_list = document.getElementById("display-completed-task-list")
+
+        // Delete complete button
+        complete_btn_id_el = document.getElementById(complete_btn_id);
+        complete_btn_id_el.remove();
+        
+        //Delete task
+        task_id_complete = document.getElementById("task-" + complete_btn_id.slice(-1));
+        task_id_complete.remove()
+
+        //Delete edit button
+        document.getElementById("edit-btn-" + complete_btn_id.slice(-1)).remove();
+
+        //Delete break element
+        console.log(document.getElementById("break-" + complete_btn_id.slice(-1)));
+        document.getElementById("break-" + complete_btn_id.slice(-1)).remove();
+
+        //Delete from task_list array
+        task_list.splice(complete_btn_id.slice(-1))
+
+
 
     function delete_Task(complete_btn_id) {
         // Delete complete button

@@ -18,6 +18,7 @@
         <legend><h2>Your Tasks</h2></legend>
         <ul id="display-task-list"></ul>
     </fieldset>
+
 </body>
 </html>
 
@@ -58,8 +59,14 @@
         //create complete button
         new_list_item_complete_btn = document.createElement("button");
         new_list_item_complete_btn.innerText = "Complete";
-        new_list_item_complete_btn.onclick = function(){delete_Task(this.id)};
+        new_list_item_complete_btn.onclick = function(){complete_Task(this.id)};
         new_list_item_complete_btn.id = "complete-btn-" + task_list.indexOf(new_task);
+
+        //create delete button
+        new_list_item_delete_btn = document.createElement("button");
+        new_list_item_delete_btn.innerText = "Delete";
+        new_list_item_delete_btn.onclick = function(){delete_Task(this.id)};
+        new_list_item_delete_btn.id = "delete-btn-" + task_list.indexOf(new_task);
 
         //create break element
         new_break = document.createElement("br");
@@ -68,7 +75,7 @@
         //append the elements to HTML
         display_task_list.appendChild(new_list_item_input);
         display_task_list.appendChild(new_list_item_edit_btn);
-        display_task_list.appendChild(new_list_item_complete_btn);
+        display_task_list.appendChild(new_list_item_delete_btn);
         display_task_list.appendChild(new_break); //create break element
     }
 
@@ -93,23 +100,29 @@
         task_list[edit_btn_id.slice(-1)] = task_id_edit.value;
     }
 
-    function delete_Task(complete_btn_id) {
-        // Delete complete button
+    function complete_Task(complete_btn_id) {
+        //Strike task
         complete_btn_id_el = document.getElementById(complete_btn_id);
-        complete_btn_id_el.remove();
+
+    }
+
+    function delete_Task(delete_btn_id) {
+        //Delete delete button
+        delete_btn_id_el = document.getElementById(delete_btn_id);
+        delete_btn_id_el.remove();
         
         //Delete task
-        task_id_complete = document.getElementById("task-" + complete_btn_id.slice(-1));
-        task_id_complete.remove()
+        task_id_delete = document.getElementById("task-" + delete_btn_id.slice(-1));
+        task_id_delete.remove()
 
         //Delete edit button
-        document.getElementById("edit-btn-" + complete_btn_id.slice(-1)).remove();
+        document.getElementById("edit-btn-" + delete_btn_id.slice(-1)).remove();
 
         //Delete break element
-        console.log(document.getElementById("break-" + complete_btn_id.slice(-1)));
-        document.getElementById("break-" + complete_btn_id.slice(-1)).remove();
+        console.log(document.getElementById("break-" + delete_btn_id.slice(-1)));
+        document.getElementById("break-" + delete_btn_id.slice(-1)).remove();
 
         //Delete from task_list array
-        task_list.splice(complete_btn_id.slice(-1))
+        task_list.splice(delete_btn_id.slice(-1))
     }
 </script>
