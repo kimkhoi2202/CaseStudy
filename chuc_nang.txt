@@ -1,0 +1,17 @@
+Finished:
+1. Add tasks
+2. Edit tasks
+3. Complete tasks: delete the tasks from the database
+
+In progress:
+1. Complete tasks: instead of deleting the tasks from the database, cross out the task name and put it into the complete area
+2. Able to reorder the tasks
+
+Hoàn thành:
+1. Thêm nhiệm vụ
+2. Chỉnh sửa nhiệm vụ
+3. Hoàn thành nhiệm vụ: xóa nhiệm vụ khỏi cơ sở dữ liệu
+
+Trong tiến trình:
+1. Hoàn thành nhiệm vụ: thay vì xóa nhiệm vụ khỏi cơ sở dữ liệu, hãy gạch bỏ tên nhiệm vụ và đưa nó vào vùng hoàn chỉnh
+2. Có thể sắp xếp lại các nhiệm vụ
