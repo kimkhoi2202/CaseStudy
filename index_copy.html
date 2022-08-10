@@ -117,6 +117,10 @@
     }
 
     function delete_Task(delete_btn_id) {
+        //Delete complete button
+        complete_btn_id_el = document.getElementById(complete_btn_id)
+        complete_btn_id_el.remove();
+
         //Delete delete button
         delete_btn_id_el = document.getElementById(delete_btn_id);
         delete_btn_id_el.remove();
