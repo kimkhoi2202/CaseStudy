@@ -75,6 +75,7 @@
         //append the elements to HTML
         display_task_list.appendChild(new_list_item_input);
         display_task_list.appendChild(new_list_item_edit_btn);
+        display_task_list.appendChild(new_list_item_complete_btn);
         display_task_list.appendChild(new_list_item_delete_btn);
         display_task_list.appendChild(new_break); //create break element
     }
@@ -103,7 +104,16 @@
     function complete_Task(complete_btn_id) {
         //Strike task
         complete_btn_id_el = document.getElementById(complete_btn_id);
-
+        task_id_complete = document.getElementById("task-" + complete_btn_id.slice(-1));
+        task_id_complete.innerHTML = "<s><b>" + task_list[complete_btn_id.slice(-1)] + "</b></s>";
+        console.log(task_id_complete)
+        
+        /*
+        complete_btn_id_el = document.getElementById(complete_btn_id);
+        task_id_complete = document.getElementById("task-" + complete_btn_id.slice(-1));
+        task_id_complete_strike = tak_id_complete.createElesment("strike");
+        task_id_complete_strike.innerText = task_list[task_id_complete];
+        */
     }
 
     function delete_Task(delete_btn_id) {
