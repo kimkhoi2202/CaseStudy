@@ -19,7 +19,6 @@
         <div class="container">
             <ul id="display-task-list"></ul>
         </div>
-
     </fieldset>
 </body>
 </html>
@@ -28,14 +27,6 @@
     //Initialize variables
     let edit_flag = false //Check if the user is editting other tasks
     let task_list = []
-    const draggables = document.querySelectorAll('.draggable')
-    const containers = document.querySelectorAll('.container')
-
-    //Drag tasks
-    draggables.forEach(draggable => {
-        draggable.addEventListener('dragstart', () => {
-            draggable.classList.add('dragging')
-        })
 
     function add_Task() {
         new_task = document.getElementById("new-task-input").value;
@@ -52,38 +43,39 @@
     }
 
     function display_Task() {
+        const display_task_list = document.getElementById("display-task-list");
+
         //create input to display the tasks
         new_list_item_input = document.createElement("input");
         new_list_item_input.value = new_task;
         new_list_item_input.readOnly = true;
-        new_list_item_input_id = "task-" + task_list.indexOf(new_task)
-        new_list_item_input.id = new_list_item_input_id;
-        String(new_list_item_input_id).className = "draggable"
+        new_list_item_input.id = "task-" + task_list.indexOf(new_task);
+        new_list_item_input.className = "draggable"
         
         //create edit button
         new_list_item_edit_btn = document.createElement("button");
         new_list_item_edit_btn.innerText = "Edit";
         new_list_item_edit_btn.onclick = function(){edit_Task(this.id)};
-        new_list_item_edit_btn_id = "edit-btn-" + task_list.indexOf(new_task)
-        new_list_item_edit_btn.id = new_list_item_edit_btn_id;
-        String(new_list_item_edit_btn_id).className = "draggable"
+        new_list_item_edit_btn.id = "edit-btn-" + task_list.indexOf(new_task);
+        new_list_item_edit_btn.className = "draggable"
 
         //create complete button
         new_list_item_complete_btn = document.createElement("button");
         new_list_item_complete_btn.innerText = "Complete";
         new_list_item_complete_btn.onclick = function(){delete_Task(this.id)};
-        new_list_item_complete_btn_id = "complete-btn-" + task_list.indexOf(new_task)
-        new_list_item_complete_btn.id = new_list_item_complete_btn_id;
+        new_list_item_complete_btn.id = "complete-btn-" + task_list.indexOf(new_task);
+        new_list_item_complete_btn.className = "draggable"
 
         //create break element
         new_break = document.createElement("br");
         new_break.id = "break-" + task_list.indexOf(new_task);
+        new_break.className = "draggable"
 
         //append the elements to HTML
         display_task_list.appendChild(new_list_item_input);
         display_task_list.appendChild(new_list_item_edit_btn);
         display_task_list.appendChild(new_list_item_complete_btn);
-        display_task_list.appendChild(new_break);
+        display_task_list.appendChild(new_break); //create break element
     }
 
     function edit_Task(edit_btn_id) {
@@ -125,5 +117,46 @@
 
         //Delete from task_list array
         task_list.splice(complete_btn_id.slice(-1))
+    }
+
+    //Drag tasks
+    const draggables = document.querySelectorAll('.draggable')
+    const containers = document.querySelectorAll('.container')
+    
+    draggables.forEach(draggable => {
+      draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging')
+      })
+    
+      draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging')
+      })
+    })
+    
+    containers.forEach(container => {
+      container.addEventListener('dragover', e => {
+        e.preventDefault()
+        const afterElement = getDragAfterElement(container, e.clientY)
+        const draggable = document.querySelector('.dragging')
+        if (afterElement == null) {
+          container.appendChild(draggable)
+        } else {
+          container.insertBefore(draggable, afterElement)
+        }
+      })
+    })
+    
+    function getDragAfterElement(container, y) {
+      const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+    
+      return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect()
+        const offset = y - box.top - box.height / 2
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child }
+        } else {
+          return closest
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element
     }
 </script>

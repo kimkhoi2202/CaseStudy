@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List: CodeGym Case Study</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <h1>To-do List</h1>
+    <form id="new-task-form" onsubmit="return false">
+        <input type="text" id="new-task-input" placeholder="Enter Your Task Here">
+        <input type="submit" id="add-task-btn" value="Add Task" onclick="add_Task()">
+    </form>
+
+    <fieldset>
+        <legend><h2>Your Tasks</h2></legend>
+        <ul id="display-task-list"></ul>
+    </fieldset>
+
+</body>
+</html>
