@@ -1,5 +1,5 @@
 //Initialize variables
-let edit_flag = false //Check if the user is editting other tasks
+let edit_flag = false //check if the user is editting other tasks
 let task_list = []
 
 function add_Task() {
@@ -32,16 +32,10 @@ function display_Task() {
     new_list_item_edit_btn.id = "edit-btn-" + task_list.indexOf(new_task);
 
     //create complete button
-    // new_list_item_complete_btn = document.createElement("button");
-    // new_list_item_complete_btn.innerText = "Complete";
-    // new_list_item_complete_btn.onclick = function(){complete_Task(this.id)};
-    // new_list_item_complete_btn.id = "complete-btn-" + task_list.indexOf(new_task);
-
-    //create delete button
-    new_list_item_delete_btn = document.createElement("button");
-    new_list_item_delete_btn.innerText = "Delete";
-    new_list_item_delete_btn.onclick = function(){delete_Task(this.id)};
-    new_list_item_delete_btn.id = "delete-btn-" + task_list.indexOf(new_task);
+    new_list_item_complete_btn = document.createElement("button");
+    new_list_item_complete_btn.innerText = "Complete";
+    new_list_item_complete_btn.onclick = function(){delete_Task(this.id)};
+    new_list_item_complete_btn.id = "complete-btn-" + task_list.indexOf(new_task);
 
     //create break element
     new_break = document.createElement("br");
@@ -51,7 +45,6 @@ function display_Task() {
     display_task_list.appendChild(new_list_item_input);
     display_task_list.appendChild(new_list_item_edit_btn);
     display_task_list.appendChild(new_list_item_complete_btn);
-    display_task_list.appendChild(new_list_item_delete_btn);
     display_task_list.appendChild(new_break); //create break element
 }
 
@@ -76,41 +69,22 @@ function save_Task(edit_btn_id) {
     task_list[edit_btn_id.slice(-1)] = task_id_edit.value;
 }
 
-// function complete_Task(complete_btn_id) {
-    //Strike task
-    // complete_btn_id_el = document.getElementById(complete_btn_id);
-    // task_id_complete = document.getElementById("task-" + complete_btn_id.slice(-1));
-    // task_id_complete.innerHTML = "<s><b>" + task_list[complete_btn_id.slice(-1)] + "</b></s>";
-    // console.log(task_id_complete)
-    
-    /*
+function delete_Task(complete_btn_id) {
+    //delete complete button
     complete_btn_id_el = document.getElementById(complete_btn_id);
-    task_id_complete = document.getElementById("task-" + complete_btn_id.slice(-1));
-    task_id_complete_strike = tak_id_complete.createElesment("strike");
-    task_id_complete_strike.innerText = task_list[task_id_complete];
-    */
-// }
-
-function delete_Task(delete_btn_id) {
-    //Delete complete button
-    complete_btn_id_el = document.getElementById(delete_btn_id)
     complete_btn_id_el.remove();
-
-    //Delete delete button
-    delete_btn_id_el = document.getElementById(delete_btn_id);
-    delete_btn_id_el.remove();
     
-    //Delete task
-    task_id_delete = document.getElementById("task-" + delete_btn_id.slice(-1));
-    task_id_delete.remove()
+    //delete task
+    task_id_complete = document.getElementById("task-" + complete_btn_id.slice(-1));
+    task_id_complete.remove()
 
-    //Delete edit button
-    document.getElementById("edit-btn-" + delete_btn_id.slice(-1)).remove();
+    //delete edit button
+    document.getElementById("edit-btn-" + complete_btn_id.slice(-1)).remove();
 
-    //Delete break element
-    console.log(document.getElementById("break-" + delete_btn_id.slice(-1)));
-    document.getElementById("break-" + delete_btn_id.slice(-1)).remove();
+    //delete break element
+    console.log(document.getElementById("break-" + complete_btn_id.slice(-1)));
+    document.getElementById("break-" + complete_btn_id.slice(-1)).remove();
 
-    //Delete from task_list array
-    task_list.splice(delete_btn_id.slice(-1))
+    //delete from task_list array
+    task_list.splice(complete_btn_id.slice(-1))
 }
